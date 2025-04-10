@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8">
+  <title>Kontrolējams kvadrāts un lācis</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+      display: block;
+      margin-bottom: 20px;
+    }
+    .info {
+      font-family: Arial, sans-serif;
+    }
+    img {
+      width: 300px;
+      height: auto;
+      border: 2px solid #333;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="400" height="400"></canvas>
+
+  <div class="info">
+    <h2>Informācija par lāci</h2>
+    <p>Lācis ir liels plēsējs, kas dzīvo mežos. Latvijā sastopams brūnais lācis. Tie ir stipri, prasmīgi peldētāji un var ātri skriet.</p>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Ursus_arctos_-_01.jpg/640px-Ursus_arctos_-_01.jpg" alt="Brūnais lācis">
+  </div>
+
+  <script>
+    const canvas = document.getElementById('myCanvas');
+    const ctx = canvas.getContext('2d');
+
+    let square = {
+      x: 50,
+      y: 50,
+      size: 50,
+      color: 'green',
+      speed: 5
+    };
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = square.color;
+      ctx.fillRect(square.x, square.y, square.size, square.size);
+    }
+
+    document.addEventListener('keydown', function(e) {
+      switch(e.key) {
+        case 'ArrowUp':
+          square.y = Math.max(0, square.y - square.speed);
+          break;
+        case 'ArrowDown':
+          square.y = Math.min(canvas.height - square.size, square.y + square.speed);
+          break;
+        case 'ArrowLeft':
+          square.x = Math.max(0, square.x - square.speed);
+          break;
+        case 'ArrowRight':
+          square.x = Math.min(canvas.width - square.size, square.x + square.speed);
+          break;
+        case 'g':
+        case 'G':
+          square.color = 'green';
+          break;
+        case 'b':
+        case 'B':
+          square.color = 'black';
+          break;
+        case 'o':
+        case 'O':
+          square.color = 'orange';
+          break;
+      }
+      draw();
+    });
+
+    draw();
+  </script>
+</body>
+</html>
